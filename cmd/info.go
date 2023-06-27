@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/spf13/cobra"
+	"linkcli/app"
 )
 
 var infoCmd = &cobra.Command{
@@ -15,8 +16,8 @@ var infoCmd = &cobra.Command{
 		url, _ := cmd.Flags().GetString("url")
 		num, _ := cmd.Flags().GetString("profile")
 		if url != "" {
-			err := GetProperties(url, num)
-			//fmt.Println(PrettyPrint(data))
+			data, err := app.GetProperties(url, num)
+			fmt.Println(PrettyPrint(data))
 			if err != nil {
 				fmt.Println(err)
 			}
@@ -28,8 +29,8 @@ var infoCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(infoCmd)
 
-	infoCmd.PersistentFlags().String("url", "", "The url you want to get properties on.")
-	infoCmd.PersistentFlags().String("profile", "1", "The number of times you want to profile the url.")
+	infoCmd.PersistentFlags().String("url", "", "The link you want to profile.")
+	infoCmd.PersistentFlags().String("profile", "1", "The number of times you want to profile the link.")
 }
 
 func PrettyPrint(i interface{}) string {
