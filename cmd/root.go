@@ -7,9 +7,9 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "networkexplorer",
-	Short: "NetworkExplorer helps evaluate various network parameters",
-	Long:  `A simple CLI tool for evaluating various network parameters. Use NetworkExplorer to stay current about different network properties of any website with just the URL`,
+	Use:   "linkcli",
+	Short: "LinkCLI helps evaluate various network parameters of a URL",
+	Long:  `A simple CLI tool for evaluating various network parameters. Use LinkCLI to stay current about different network properties of any website with just the URL`,
 	// Run: func(cmd *cobra.Command, args []string) {
 	// 	// Do Stuff Here
 	// },

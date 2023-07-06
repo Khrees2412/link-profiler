@@ -5,24 +5,36 @@ import (
 	"fmt"
 	"github.com/spf13/cobra"
 	"linkcli/app"
+	"strings"
 )
 
 var infoCmd = &cobra.Command{
 	Use:   "get",
 	Short: "To get the information you need",
-	Long:  `This command is what helps netcli know what you want to do`,
+	Long:  `This command is what helps linkcli know what you want to do`,
 	Run: func(cmd *cobra.Command, args []string) {
 
 		url, _ := cmd.Flags().GetString("url")
 		num, _ := cmd.Flags().GetString("profile")
+
 		if url != "" {
-			data, err := app.GetProperties(url, num)
-			fmt.Println(PrettyPrint(data))
-			if err != nil {
-				fmt.Println(err)
+			if strings.ContainsAny(url, ",") {
+				urls := strings.Split(url, ",")
+				for _, url := range urls {
+					data, err := app.GetProperties(url, num)
+					fmt.Println(PrettyPrint(data))
+					if err != nil {
+						fmt.Println(err)
+					}
+				}
+			} else {
+				data, err := app.GetProperties(url, num)
+				fmt.Println(PrettyPrint(data))
+				if err != nil {
+					fmt.Println(err)
+				}
 			}
 		}
-
 	},
 }
 
